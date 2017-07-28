@@ -72,7 +72,7 @@ function is_favourite($id) {
 
     </head>
 <body>
-    <?php echo join(', ', $_SESSION['favourites']); ?>
+    <?php //echo join(', ', $_SESSION['favourites']); ?>
 
     <div id="blog-posts">
         <div id="blog-post-101" class="blog-post <?php if(is_favourite(101)) { echo 'favourite';} ?>">

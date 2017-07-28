@@ -38,7 +38,7 @@ if(preg_match("/blog-post-(\d+)/", $raw_id, $matches)){
     $id = $matches[1];
 
     // store in $_SESSION['favourite'];
-    if (!in_array($id, $_SESSION['favourites'])) {
+    if (in_array($id, $_SESSION['favourites'])) {
         $_SESSION['favourites'] = array_remove($id, $_SESSION['favourites']);
     }
 
