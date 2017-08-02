@@ -5,6 +5,7 @@
  * Date: 8/2/2017
  * Time: 11:03 AM
  */
+sleep(2);
 
 function is_ajax_request() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
@@ -26,7 +27,7 @@ if ($height == '') {
 }
 
 if(!empty($errors)) {
-    // won't work b/c of single-quotes
+    // won't work b/c of single-quotes, json phrase is picky about single quotes
     //echo "{ 'errors': " . json_encode($errors) . "}";
     $result_array = array('errors' => $errors);
     echo json_encode($result_array);
@@ -37,6 +38,7 @@ $volume = $length * $width * $height;
 
 if(is_ajax_request()) {
     echo json_encode(array('volume' => $volume));
+    //echo $volume;
 }else {
     exit;
 }
