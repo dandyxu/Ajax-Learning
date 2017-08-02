@@ -57,6 +57,8 @@
 
     var result_div = document.getElementById("result");
     var volume = document.getElementById("volume");
+    var button = document.getElementById("ajax-submit");
+    var orig_button_value = button.value;
 
     function showSpinner() {
         var spinner = document.getElementById("spinner");
@@ -66,6 +68,19 @@
     function hideSpinner() {
         var spinner = document.getElementById("spinner");
         spinner.style.display = 'none';
+    }
+
+    function disableSubmitButton() {
+        button.disabled = true;
+
+        //if you want to change text of button
+        button.value = 'Loading...';
+    }
+
+    function enableSubmitButton() {
+        button.disabled = false;
+        // Go back to original text of button
+        button.value = orig_button_value;
     }
 
     function displayErrors (errors) {
@@ -112,6 +127,8 @@
         clearErrors();
         showSpinner();
 
+        disableSubmitButton();
+
         var form = document.getElementById("measurement-form");
         // determine form action
         var action = form.getAttribute("action");
@@ -136,6 +153,7 @@
                 console.log('Result: ' + result);
 
                 hideSpinner();
+                enableSubmitButton();
 
                 var json = JSON.parse(result);
                 if(json.hasOwnProperty('errors') && json.errors.length > 0) {
@@ -148,7 +166,6 @@
         xhr.send(form_data);
     }
 
-    var button = document.getElementById("ajax-submit");
     button.addEventListener("click", calculateMeasurements);
 
 </script>

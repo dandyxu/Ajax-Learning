@@ -5,7 +5,7 @@
  * Date: 8/2/2017
  * Time: 11:03 AM
  */
-sleep(2);
+//sleep(2);
 
 function is_ajax_request() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
