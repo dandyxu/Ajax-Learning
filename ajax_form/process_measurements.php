@@ -1,0 +1,23 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Wenqian
+ * Date: 8/2/2017
+ * Time: 11:03 AM
+ */
+
+function is_ajax_request() {
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+}
+
+$length = isset($_POST['length']) ? (int) $_POST['length'] : '';
+$width = isset($_POST['width']) ? (int) $_POST['width'] : '';
+$height = isset($_POST['height']) ? (int) $_POST['height'] : '';
+
+$volume = $length * $width * $height;
+
+if(is_ajax_request()) {
+    echo $volume;
+}else {
+    exit;
+}
