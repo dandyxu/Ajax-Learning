@@ -31,7 +31,7 @@
 
 <body>
     <div id="blog-posts">
-        <div id="blog-post-101" class="blog-post">
+        <!--<div id="blog-post-101" class="blog-post">
             <h3>Blog Post 101</h3>
             <p>This is Blog Post 101 content</p>
         </div>
@@ -42,7 +42,7 @@
         <div id="blog-post-103" class="blog-post">
             <h3>Blog Post 103</h3>
             <p>This is Blog Post 103 content</p>
-        </div>
+        </div>-->
     </div>
 
     <div id="spinner">
@@ -75,6 +75,23 @@
             load_more.style.display = 'none';
         }
 
+        function appendToDiv(div, new_html) {
+            // Put the new HTML into a temp div
+            // This causes browser to parse it as elements.
+            var temp = document.createElement('div');
+            temp.innerHTML = new_html;
+
+            // Then we can find and work with those elements.
+            // Use firstElementChild because of how DOM treats whitespace.
+            var class_name = temp.firstElementChild.className;
+            var items = temp.getElementsByClassName(class_name);
+            var len = items.length;
+
+            for (i=0; i < len; i++) {
+                div.appendChild(items[0]);
+            }
+        }
+
         function loadMore() {
 
             showSpinner();
@@ -91,6 +108,8 @@
                     hideSpinner();
 
                     //append results to end of blog posts
+                    appendToDiv(container, result);
+
                     showLoadMore();
                 }
             };
