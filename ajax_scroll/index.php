@@ -59,6 +59,9 @@
         var load_more = document.getElementById('load-more');
         var spinner = document.getElementById('spinner');
 
+        // Prevent Multiple Requests
+        var request_in_progress = false;
+
         function showSpinner() {
             spinner.style.display = 'block';
         }
@@ -97,7 +100,21 @@
             load_more.setAttribute('data-page', page);
         }
 
+        //Trigger Ajax on scroll
+        function scrollReaction() {
+            var content_height = container.offsetHeight;
+            var current_y = window.innerHeight + window.pageYOffset;
+            console.log(current_y + '/' + content_height);
+            if(current_y >= content_height) {
+                loadMore();
+            }
+        }
+
         function loadMore() {
+
+            // Prevent Multiple Requests
+            if (request_in_progress) { return;}
+            request_in_progress = true;
 
             showSpinner();
             hideLoadMore();
@@ -120,12 +137,17 @@
                     appendToDiv(container, result);
 
                     showLoadMore();
+                    request_in_progress = false;
                 }
             };
             xhr.send();
         }
 
         load_more.addEventListener("click", loadMore);
+        //Trigger Ajax
+        window.onscroll = function() {
+            scrollReaction();
+        }
 
         // Load even the first page with Ajax
         loadMore();
