@@ -137,6 +137,7 @@
                     appendToDiv(container, result);
 
                     showLoadMore();
+
                     request_in_progress = false;
                 }
             };
