@@ -6,8 +6,24 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById("search-form");
     var search = document.getElementById("search");
 
-    function showSuggestions(json) {
+    function suggestionsToList(items) {
+        //<li><a href="search.php?q=alpha">Alpha</a></li>
+        var output = '';
 
+        for(i=0; i < items.length; i++) {
+            output += '<li>';
+            output += '<a href="search.php?q=' + items[i] + '">';
+            output += items[i];
+            output += '</a>';
+            output += '</li>';
+        }
+
+        return output;
+    }
+
+    function showSuggestions(json) {
+        var li_list = suggestionsToList(json);
+        suggestions.innerHTML = li_list;
         suggestions.style.display = 'block';
 
     }
@@ -25,12 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'autosuggest.php?q=' + q, true);
-        xhr.setRequestHeader('X-Reqeusted-Width', 'XMLHttpReqeust');
+        xhr.setRequestHeader('X-Requested-Width', 'XMLHttpRequest');
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
                 console.log('Results: ' + result);
-                result = '{}';
+                //result = '{}';
 
                 var json = JSON.parse(result);
                 showSuggestions(json);
@@ -39,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send();
     }
 
+    // use "input" (every key), not "change" (must lose focus)
     search.addEventListener("input", getSuggestions);
 
 });

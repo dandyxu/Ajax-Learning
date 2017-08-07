@@ -33,10 +33,11 @@
                 </form>
 
                 <ul id="suggestions">
-                    <li><a href="search.php?q=alpha">Alpha</a></li>
-                    <li><a href="search.php?q=beta">Beta</a></li>
-                    <li><a href="search.php?q=gamma">Gamma</a></li>
-                    <li><a href="search.php?q=delta">Delta</a></li>
+<!--                    <li><a href="search.php?q=alpha">Alpha</a></li>-->
+<!--                    <li><a href="search.php?q=beta">Beta</a></li>-->
+<!--                    <li><a href="search.php?q=gamma">Gamma</a></li>-->
+<!--                    <li><a href="search.php?q=delta">Delta</a></li>-->
+
                 </ul>
             </div>
 
